@@ -118,11 +118,15 @@
   * {
     @apply border-border outline-ring/50;
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3d1b26ff794b153c26f57c4ded4caaa6bc19a189
   body {
     @apply bg-background text-foreground;
   }
 }
+<<<<<<< HEAD
 
 html {
   scroll-behavior: smooth;
@@ -156,3 +160,5 @@ html {
 .animate-scroll {
   animation: scroll var(--animation-duration, 60s) linear infinite;
 }
+=======
+>>>>>>> 3d1b26ff794b153c26f57c4ded4caaa6bc19a189
