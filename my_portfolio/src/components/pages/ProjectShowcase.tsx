@@ -1,8 +1,55 @@
+import { useEffect, useState } from "react";
 import { ExternalLink } from "lucide-react";
-import { Project } from "@/lib/data";
 import { InfiniteMovingCards } from "../ui/infinite-moving-cards";
+import * as SiIcons from "react-icons/si"; // Import all Simple Icons
 
-const ProjectShowcase = ({ projects }: { projects: Project[] }) => {
+interface Project {
+    id: string;
+    title: string;
+    description: string;
+    image: string;
+    link: string;
+    languages?: string[];
+}
+
+// Mapping language names to react-icons/si component names
+const languageIcons: { [key: string]: keyof typeof SiIcons } = {
+    "Django": "SiDjango",
+    "FastAPI": "SiFastapi",
+    "NodeJS": "SiNodedotjs", // Corrected from SiNodeDotJs
+    "Stripe": "SiStripe",
+    "GenAI": "SiOpenai", // Changed to OpenAI icon
+    "Chrome Extension": "SiGooglechrome",
+    "Map Tracking": "SiOpenstreetmap",
+    "SQLite": "SiSqlite",
+    "React": "SiReact",
+    "Android Studio": "SiAndroidstudio",
+    "Python": "SiPython",
+    "Kotlin": "SiKotlin",
+    "Firebase": "SiFirebase",
+    "Spring Boot": "SiSpringboot",
+    "Thymeleaf": "SiThymeleaf",
+    "OAuth": "SiAuth0",
+    "JWT": "SiJsonwebtokens",
+    "MySQL": "SiMysql",
+};
+
+const ProjectShowcase = () => {
+    const [projects, setProjects] = useState<Project[]>([]);
+
+    useEffect(() => {
+        const fetchProjects = async () => {
+            try {
+                const response = await fetch("http://127.0.0.1:8000/projects");
+                const data = await response.json();
+                setProjects(data);
+            } catch (error) {
+                console.error("Error fetching projects:", error);
+            }
+        };
+        fetchProjects();
+    }, []);
+
     return (
         <section className="py-24 px-6 overflow-hidden">
             <div className="container mx-auto">
@@ -38,15 +85,34 @@ const ProjectShowcase = ({ projects }: { projects: Project[] }) => {
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                     </div>
                                     <div className="p-6 flex-1 flex flex-col">
-                                        <h3 className="text-xl font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors">{project.title}</h3>
-                                        <p className="text-gray-300 mb-4 line-clamp-3">{project.description}</p>
+                                        <h3 className="text-xl font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors">
+                                            {project.title}
+                                        </h3>
+                                        <p className="text-gray-300 mb-4 line-clamp-3">
+                                            {project.description}
+                                        </p>
+
+                                        {/* Display Language Icons */}
                                         <div className="flex flex-wrap gap-2 mb-4">
-                                            {project.logos.map((Logo, index: number) => (
-                                                <span key={index} className="transition-transform duration-300 group-hover:scale-110">{Logo}</span>
-                                            ))}
+                                            {(project.languages || []).map((lang, index) => {
+                                                const iconName = languageIcons[lang]; // Mapped icon name
+                                                const IconComponent = iconName ? SiIcons[iconName] : null; // Fetch component
+
+                                                console.log("Language:", lang, "Icon Name:", iconName, "Exists:", !!IconComponent);
+
+                                                return IconComponent ? (
+                                                    <IconComponent key={index} className="h-8 w-8 text-yellow-400" title={lang} />
+                                                ) : (
+                                                    <span key={index} className="text-red-500">🚨 {lang} Icon Not Found</span>
+                                                );
+                                            })}
                                         </div>
+
+
                                         <a
                                             href={project.link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             className="mt-auto bg-blue-600 hover:bg-yellow-700/90 text-white py-2 px-4 rounded-lg inline-flex items-center justify-center transition-all duration-300 group-hover:bg-yellow-500 group-hover:text-black"
                                         >
                                             <span className="mr-2">View Project</span>

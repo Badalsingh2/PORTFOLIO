@@ -21,10 +21,10 @@ const Navbar: React.FC<NavbarProps> = ({ mobileMenuOpen, setMobileMenuOpen }) =>
   }, []);
 
   const navLinks = [
-    { name: "Projects", href: "#projects" },
-    { name: "Skills", href: "#skills" },
-    { name: "Achievements", href: "#achievements" },
-    { name: "Contact", href: "#contact" },
+    { name: "Projects", href: "/projects" },
+    { name: "Skills", href: "/skills" },
+    { name: "Achievements", href: "/achievements" },
+    { name: "Contact", href: "/contact" },
   ];
 
   return (
