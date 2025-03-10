@@ -28,7 +28,7 @@ app.add_middleware(
 )
 
 # MongoDB Connection
-MONGO_URI = "mongodb+srv://portfolio:badal123@dbcluster.gbu8l.mongodb.net/?retryWrites=true&w=majority&appName=dbCluster"
+MONGO_URI = "your key"
 client = AsyncIOMotorClient(MONGO_URI)
 db = client["portfolio"]
 
