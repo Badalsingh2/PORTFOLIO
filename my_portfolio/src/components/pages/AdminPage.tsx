@@ -16,9 +16,9 @@ const AdminPage = () => {
 
         const fetchData = async () => {
             try {
-                const projectRes = await fetch("http://localhost:8000/projects/");
-                const skillRes = await fetch("http://localhost:8000/skills/");
-                const achievementRes = await fetch("http://localhost:8000/achievements/");
+                const projectRes = await fetch("https://portfolio-ckll.onrender.com/projects/");
+                const skillRes = await fetch("https://portfolio-ckll.onrender.com/skills/");
+                const achievementRes = await fetch("https://portfolio-ckll.onrender.com/achievements/");
 
                 const projectsData = await projectRes.json();
                 const skillsData = await skillRes.json();
@@ -44,7 +44,7 @@ const AdminPage = () => {
 
     // ✅ Function to Add Project
     const addProject = async () => {
-        const response = await fetch("http://localhost:8000/projects/", {
+        const response = await fetch("https://portfolio-ckll.onrender.com/projects/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -67,7 +67,7 @@ const AdminPage = () => {
 
     // ✅ Function to Add Skill
     const addSkill = async () => {
-        const response = await fetch("http://localhost:8000/skills/", {
+        const response = await fetch("https://portfolio-ckll.onrender.com/skills/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -87,7 +87,7 @@ const AdminPage = () => {
 
     // ✅ Function to Add Achievement
     const addAchievement = async () => {
-        const response = await fetch("http://localhost:8000/achievements/", {
+        const response = await fetch("https://portfolio-ckll.onrender.com/achievements/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

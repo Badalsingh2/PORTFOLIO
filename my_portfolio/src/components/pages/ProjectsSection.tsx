@@ -67,7 +67,7 @@ const ProjectsSection = () => {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const response = await fetch("http://localhost:8000/projects"); // Update with your actual backend URL
+                const response = await fetch("https://portfolio-ckll.onrender.com/projects/"); // Update with your actual backend URL
                 if (!response.ok) {
                     throw new Error("Failed to fetch projects");
                 }

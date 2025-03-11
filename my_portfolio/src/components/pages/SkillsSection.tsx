@@ -21,7 +21,7 @@ const SkillsSection = () => {
     useEffect(() => {
         const fetchSkills = async () => {
             try {
-                const response = await fetch("http://127.0.0.1:8000/skills/"); // Update with your API URL
+                const response = await fetch("https://portfolio-ckll.onrender.com/skills/"); // Update with your API URL
                 if (!response.ok) throw new Error("Failed to fetch skills");
                 
                 const data: Skill[] = await response.json();

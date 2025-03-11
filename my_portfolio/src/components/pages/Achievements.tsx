@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
@@ -24,7 +23,7 @@ const Achievements = () => {
     useEffect(() => {
         const fetchAchievements = async () => {
             try {
-                const response = await fetch("http://127.0.0.1:8000/achievements"); // Update with your backend URL
+                const response = await fetch("https://portfolio-ckll.onrender.com/achievements"); // Update with your backend URL
                 const data = await response.json();
                 setAchievements(data);
             } catch (error) {
