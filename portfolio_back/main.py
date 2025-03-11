@@ -84,11 +84,7 @@ async def initialize_users():
     existing_users = await db["users"].count_documents({})
     if existing_users == 0:  # Add only if empty
         users = [
-            {
-                "username": "BadalSingh",
-                "password": pwd_context.hash("Badal159"),
-                "role": "admin",
-            },
+            
             {
                 "username": "normal_user",
                 "password": pwd_context.hash("user123"),

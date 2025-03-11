@@ -128,14 +128,14 @@ const ProjectsSection = () => {
     const getTechIcon = (tech: string) => {
         console.log("Looking for tech icon:", tech);
         
-        const normalizedTech = tech.toLowerCase();
+        const normalizedTech = tech.trim().toLowerCase();
         const iconKey = Object.keys(techIcons).find(key => key.toLowerCase() === normalizedTech);
     
         if (iconKey) {
             return techIcons[iconKey];
         }
         console.log("Technology:", tech, "Icon found:", techIcons[tech]);
-        return <span className="text-white font-bold">{tech.charAt(0)}</span>; // Fallback
+        return techIcons[normalizedTech] || <span className="text-white font-bold">{tech.charAt(0)}</span>; // Fallback
     };
 
     return (
