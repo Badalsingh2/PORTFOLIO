@@ -1,13 +1,33 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+interface Project {
+    title: string;
+    description: string;
+    image: string;
+    link: string;
+    logos: string[];
+}
+
+interface Skill {
+    name: string;
+    icon: string;
+    category: string;
+}
+
+interface Achievement {
+    title: string;
+    description: string;
+    icon: string;
+}
+
 const AdminPage = () => {
-    const [projects, setProjects] = useState([]);
-    const [skills, setSkills] = useState([]);
-    const [achievements, setAchievements] = useState([]);
-    const [newProject, setNewProject] = useState({ title: "", description: "", image: "", link: "", logos: [] });
-    const [newSkill, setNewSkill] = useState({ name: "", icon: "", category: "" });
-    const [newAchievement, setNewAchievement] = useState({ title: "", description: "", icon: "" });
+    const [projects, setProjects] = useState<Project[]>([]);
+    const [skills, setSkills] = useState<Skill[]>([]);
+    const [achievements, setAchievements] = useState<Achievement[]>([]);
+    const [newProject, setNewProject] = useState<Project>({ title: "", description: "", image: "", link: "", logos: [] });
+    const [newSkill, setNewSkill] = useState<Skill>({ name: "", icon: "", category: "" });
+    const [newAchievement, setNewAchievement] = useState<Achievement>({ title: "", description: "", icon: "" });
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -42,7 +62,6 @@ const AdminPage = () => {
 
     const token = localStorage.getItem("token");
 
-    // ✅ Function to Add Project
     const addProject = async () => {
         const response = await fetch("https://portfolio-ckll.onrender.com/projects/", {
             method: "POST",
@@ -52,7 +71,7 @@ const AdminPage = () => {
             },
             body: JSON.stringify({
                 ...newProject,
-                logos: newProject.logos.split(",").map((logo) => logo.trim()), // Convert logos to an array
+                logos: newProject.logos.map((logo) => logo.trim()),
             }),
         });
 
@@ -65,7 +84,6 @@ const AdminPage = () => {
         }
     };
 
-    // ✅ Function to Add Skill
     const addSkill = async () => {
         const response = await fetch("https://portfolio-ckll.onrender.com/skills/", {
             method: "POST",
@@ -85,7 +103,6 @@ const AdminPage = () => {
         }
     };
 
-    // ✅ Function to Add Achievement
     const addAchievement = async () => {
         const response = await fetch("https://portfolio-ckll.onrender.com/achievements/", {
             method: "POST",
@@ -103,6 +120,14 @@ const AdminPage = () => {
         } else {
             alert("Failed to add achievement");
         }
+    };
+
+    const handleLogosChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setNewProject((prev) => ({
+            ...prev,
+            logos: value.split(",").map((logo) => logo.trim()), // Ensure logos is always an array
+        }));
     };
 
     return (
@@ -152,12 +177,12 @@ const AdminPage = () => {
                         onChange={(e) => setNewProject({ ...newProject, link: e.target.value })}
                         className="w-full p-2 bg-gray-800 rounded mt-2"
                     />
-                    <input
+                     <input
                         type="text"
-                        placeholder="Logos (comma-separated)"
-                        value={newProject.logos}
-                        onChange={(e) => setNewProject({ ...newProject, logos: e.target.value })}
-                        className="w-full p-2 bg-gray-800 rounded mt-2"
+                        placeholder="Logos (comma separated)"
+                        value={newProject.logos.join(", ")}
+                        onChange={handleLogosChange}
+                        className="block w-full p-2 mt-2 bg-gray-800"
                     />
                     <button onClick={addProject} className="px-4 py-2 bg-blue-500 mt-2 rounded">Add Project</button>
                 </div>

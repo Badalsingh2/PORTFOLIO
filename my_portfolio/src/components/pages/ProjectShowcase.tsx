@@ -94,9 +94,18 @@ const ProjectShowcase = () => {
 
                                         {/* Display Language Icons */}
                                         <div className="flex flex-wrap gap-2 mb-4">
-                                            {(project.languages || []).map((lang, index) => {
-                                                const iconName = languageIcons[lang]; // Mapped icon name
-                                                const IconComponent = iconName ? SiIcons[iconName] : null; // Fetch component
+                                            {(project.languages || []).map((lang: string, index: number) => {
+                                                if (!lang) {
+                                                    console.error(`Missing language entry at index ${index}`);
+                                                    return <span key={index} className="text-red-500">🚨 Invalid Language</span>;
+                                                }
+
+                                                const iconName = languageIcons[lang];
+                                                if (!iconName) {
+                                                    console.warn(`No icon mapping found for language: ${lang}`);
+                                                }
+
+                                                const IconComponent = iconName ? SiIcons[iconName] : null;
 
                                                 console.log("Language:", lang, "Icon Name:", iconName, "Exists:", !!IconComponent);
 
@@ -107,6 +116,7 @@ const ProjectShowcase = () => {
                                                 );
                                             })}
                                         </div>
+
 
 
                                         <a

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import "../../index.css";
 import { FaReact, FaNodeJs, FaPython, FaVuejs, FaJs, FaAngular, FaAws, FaDocker } from "react-icons/fa";
 import { SiTypescript, SiTailwindcss, SiMongodb, SiNextdotjs, SiFirebase, SiExpress } from "react-icons/si";
+import { JSX } from "react";
 
 interface Project {
     id: string;

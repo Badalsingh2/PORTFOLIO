@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Badge } from "@/components/ui/badge";
 import { SparklesCore } from "../ui/sparkles";
 import { motion } from "framer-motion";
 import * as Icons from "react-icons/si"; // Import all Si-prefixed icons

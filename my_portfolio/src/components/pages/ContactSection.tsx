@@ -172,11 +172,9 @@ const ContactSection = () => {
                         className="w-full"
                     >
                         <HoverBorderGradient
-                            className="rounded-xl p-[1px] bg-black w-full"
+                            className="rounded-xl p-[1px] bg-black w-full from-blue-500 to-pink-500 animate-pulse"
                             containerClassName="rounded-xl w-full"
-                            from="from-blue-500"
-                            to="to-pink-500"
-                            animate="true"
+                            
                         >
                             <div className="bg-black/90 backdrop-blur-sm p-8 md:p-10 rounded-xl w-full">
                                 <form onSubmit={sendMail} ref={formRef} className="space-y-6">
