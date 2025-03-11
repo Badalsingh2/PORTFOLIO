@@ -176,7 +176,7 @@ const ContactSection = () => {
                             containerClassName="rounded-xl w-full"
                             from="from-blue-500"
                             to="to-pink-500"
-                            animate={true}
+                            animate="true"
                         >
                             <div className="bg-black/90 backdrop-blur-sm p-8 md:p-10 rounded-xl w-full">
                                 <form onSubmit={sendMail} ref={formRef} className="space-y-6">

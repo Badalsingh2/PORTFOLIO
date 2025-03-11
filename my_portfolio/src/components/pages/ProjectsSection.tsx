@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import "../../index.css";
+import { FaReact, FaNodeJs, FaPython, FaVuejs, FaJs, FaAngular, FaAws, FaDocker } from "react-icons/fa";
+import { SiTypescript, SiTailwindcss, SiMongodb, SiNextdotjs, SiFirebase, SiExpress } from "react-icons/si";
 
 interface Project {
     id: string;
@@ -8,8 +10,53 @@ interface Project {
     description: string;
     image: string;
     link: string;
-    logos: string[];
+    technologies: string[]; // Changed from logos to technologies
 }
+
+// Tech icon mapping with consistent naming
+const techIcons: { [key: string]: JSX.Element } = {
+    "React": <FaReact className="text-blue-400" />,
+    "react": <FaReact className="text-blue-400" />,
+    "Node.js": <FaNodeJs className="text-green-500" />,
+    "node.js": <FaNodeJs className="text-green-500" />,
+    "nodejs": <FaNodeJs className="text-green-500" />,
+    "Node": <FaNodeJs className="text-green-500" />,
+    "node": <FaNodeJs className="text-green-500" />,
+    "TypeScript": <SiTypescript className="text-blue-600" />,
+    "typescript": <SiTypescript className="text-blue-600" />,
+    "ts": <SiTypescript className="text-blue-600" />,
+    "JavaScript": <FaJs className="text-yellow-400" />,
+    "javascript": <FaJs className="text-yellow-400" />,
+    "js": <FaJs className="text-yellow-400" />,
+    "Python": <FaPython className="text-blue-500" />,
+    "python": <FaPython className="text-blue-500" />,
+    "py": <FaPython className="text-blue-500" />,
+    "Tailwind": <SiTailwindcss className="text-cyan-400" />,
+    "tailwind": <SiTailwindcss className="text-cyan-400" />,
+    "TailwindCSS": <SiTailwindcss className="text-cyan-400" />,
+    "tailwindcss": <SiTailwindcss className="text-cyan-400" />,
+    "MongoDB": <SiMongodb className="text-green-600" />,
+    "mongodb": <SiMongodb className="text-green-600" />,
+    "mongo": <SiMongodb className="text-green-600" />,
+    "Vue.js": <FaVuejs className="text-green-500" />,
+    "vue.js": <FaVuejs className="text-green-500" />,
+    "Vue": <FaVuejs className="text-green-500" />,
+    "vue": <FaVuejs className="text-green-500" />,
+    "Angular": <FaAngular className="text-red-500" />,
+    "angular": <FaAngular className="text-red-500" />,
+    "Next.js": <SiNextdotjs className="text-white" />,
+    "next.js": <SiNextdotjs className="text-white" />,
+    "Next": <SiNextdotjs className="text-white" />,
+    "next": <SiNextdotjs className="text-white" />,
+    "Firebase": <SiFirebase className="text-yellow-500" />,
+    "firebase": <SiFirebase className="text-yellow-500" />,
+    "Express": <SiExpress className="text-gray-400" />,
+    "express": <SiExpress className="text-gray-400" />,
+    "AWS": <FaAws className="text-orange-400" />,
+    "aws": <FaAws className="text-orange-400" />,
+    "Docker": <FaDocker className="text-blue-500" />,
+    "docker": <FaDocker className="text-blue-500" />
+};
 
 const ProjectsSection = () => {
     const [projects, setProjects] = useState<Project[]>([]);
@@ -25,8 +72,10 @@ const ProjectsSection = () => {
                     throw new Error("Failed to fetch projects");
                 }
                 const data = await response.json();
+                console.log("Fetched projects:", data); // Debug log
                 setProjects(data.slice(0, 3)); // Display only first 3 projects
-            } catch (err) {
+            } catch (err: any) {
+                console.error("Error fetching projects:", err); // Debug log
                 setError(err.message);
             } finally {
                 setLoading(false);
@@ -36,8 +85,58 @@ const ProjectsSection = () => {
         fetchProjects();
     }, []);
 
+    // Fallback data in case the API fails
+    useEffect(() => {
+        if (error) {
+            const fallbackProjects = [
+                {
+                    id: "1",
+                    title: "AI Content Generator",
+                    description: "A full-stack application leveraging OpenAI's API to generate various types of content. Features user authentication and content history.",
+                    image: "https://via.placeholder.com/600x400",
+                    link: "#",
+                    technologies: ["React", "Node.js", "TypeScript", "MongoDB"]
+                },
+                {
+                    id: "2",
+                    title: "E-commerce Dashboard",
+                    description: "Interactive dashboard for store owners to track sales, inventory, and customer behavior with real-time data visualization.",
+                    image: "https://via.placeholder.com/600x400",
+                    link: "#",
+                    technologies: ["Next.js", "Tailwind", "Firebase", "TypeScript"]
+                },
+                {
+                    id: "3",
+                    title: "Project Management App",
+                    description: "Collaborative tool for teams to manage projects, track tasks, and communicate efficiently in one centralized platform.",
+                    image: "https://via.placeholder.com/600x400",
+                    link: "#",
+                    technologies: ["Vue.js", "Express", "MongoDB", "AWS"]
+                }
+            ];
+            console.log("Using fallback projects:", fallbackProjects); // Debug log
+            setProjects(fallbackProjects);
+            setLoading(false);
+        }
+    }, [error]);
+
     if (loading) return <p className="text-white text-center">Loading projects...</p>;
-    if (error) return <p className="text-red-500 text-center">Error: {error}</p>;
+
+    console.log("Rendering projects:", projects); // Debug log
+
+    // Helper function to find the correct tech icon
+    const getTechIcon = (tech: string) => {
+        console.log("Looking for tech icon:", tech);
+        
+        const normalizedTech = tech.toLowerCase();
+        const iconKey = Object.keys(techIcons).find(key => key.toLowerCase() === normalizedTech);
+    
+        if (iconKey) {
+            return techIcons[iconKey];
+        }
+        console.log("Technology:", tech, "Icon found:", techIcons[tech]);
+        return <span className="text-white font-bold">{tech.charAt(0)}</span>; // Fallback
+    };
 
     return (
         <section className="py-32 relative overflow-hidden" id="projects">
@@ -107,10 +206,21 @@ const ProjectsSection = () => {
                                         alt={project.title}
                                         className="w-full h-full object-cover transform group-hover:scale-110 transition-all duration-700 ease-out"
                                     />
+                                    {/* Enhanced tech icons display */}
                                     <div className="absolute top-4 right-4 z-20 flex flex-wrap justify-end gap-2">
-                                        {project.logos.map((logo, index) => (
-                                            <span key={index}>{logo}</span>
-                                        ))}
+                                        {Array.isArray(project.technologies) && project.technologies.length > 0 ? (
+                                            project.technologies.map((tech, i) => (
+                                                <div 
+                                                    key={i} 
+                                                    className="w-8 h-8 rounded-full bg-gray-900/80 backdrop-blur-sm flex items-center justify-center border border-gray-700 group-hover:border-blue-500/50 transition-all duration-300"
+                                                    title={tech}
+                                                >
+                                                    {getTechIcon(tech)}
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <div className="text-xs text-gray-400">No technologies</div>
+                                        )}
                                     </div>
                                 </div>
 
@@ -129,6 +239,12 @@ const ProjectsSection = () => {
                                             >
                                                 View Project
                                             </a>
+                                        </div>
+                                        {/* Enhanced tech names display */}
+                                        <div className="text-xs text-gray-500 truncate max-w-[70%]">
+                                            {Array.isArray(project.technologies) && project.technologies.length > 0
+                                                ? project.technologies.join(" • ")
+                                                : "No technologies listed"}
                                         </div>
                                     </div>
                                 </div>

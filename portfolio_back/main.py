@@ -9,6 +9,7 @@ from datetime import datetime, timedelta
 from fastapi.middleware.cors import CORSMiddleware
 from bson import ObjectId
 import os
+from dotenv import load_dotenv
 
 # Initialize FastAPI
 app = FastAPI()
@@ -28,8 +29,11 @@ app.add_middleware(
 )
 
 # MongoDB Connection
-MONGO_URI = "your key"
-client = AsyncIOMotorClient(MONGO_URI)
+load_dotenv()
+
+MONGODB_URL = os.getenv("MONGO_URI")
+
+client = AsyncIOMotorClient(MONGODB_URL)
 db = client["portfolio"]
 
 # JWT Configuration

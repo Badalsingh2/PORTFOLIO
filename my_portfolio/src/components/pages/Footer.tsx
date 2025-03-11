@@ -1,4 +1,4 @@
-import { Github, Twitter, Linkedin, Mail } from "lucide-react";
+import { Github, Twitter, Linkedin, Mail, Instagram } from "lucide-react";
 
 const Footer = () => {
     return (
@@ -23,17 +23,17 @@ const Footer = () => {
                     <div>
                         <h4 className="text-lg font-semibold mb-4 text-white">Connect</h4>
                         <ul className="space-y-2 text-gray-400">
-                            <li><a href="#" className="hover:text-blue-400 transition-colors flex items-center"><Github size={16} className="mr-2" /> GitHub</a></li>
-                            <li><a href="#" className="hover:text-blue-400 transition-colors flex items-center"><Twitter size={16} className="mr-2" /> Twitter</a></li>
-                            <li><a href="#" className="hover:text-blue-400 transition-colors flex items-center"><Linkedin size={16} className="mr-2" /> LinkedIn</a></li>
+                            <li><a href="https://github.com/Badalsingh2" className="hover:text-blue-400 transition-colors flex items-center"><Github size={16} className="mr-2" /> GitHub</a></li>
+                            <li><a href="https://www.instagram.com/ll_badal_singh_ll/" className="hover:text-blue-400 transition-colors flex items-center"><Instagram size={16} className="mr-2" /> Instagram</a></li>
+                            <li><a href="https://www.linkedin.com/in/badal-singh-454b18255/" className="hover:text-blue-400 transition-colors flex items-center"><Linkedin size={16} className="mr-2" /> LinkedIn</a></li>
                         </ul>
                     </div>
 
                     <div>
                         <h4 className="text-lg font-semibold mb-4 text-white">Contact</h4>
                         <ul className="space-y-2 text-gray-400">
-                            <li className="flex items-center"><Mail size={16} className="mr-2" /> hello@example.com</li>
-                            <li>San Francisco, California</li>
+                            <li className="flex items-center"><Mail size={16} className="mr-2" /> bs.421521@gmail.com</li>
+                            <li>Kudus,Palghar</li>
                         </ul>
                     </div>
                 </div>
@@ -41,13 +41,13 @@ const Footer = () => {
                 <div className="border-t border-gray-800 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center">
                     <p className="text-gray-500 mb-4 md:mb-0">© 2025 Dev Portfolio. All rights reserved.</p>
                     <div className="flex space-x-6">
-                        <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                        <a href="https://github.com/Badalsingh2" className="text-gray-400 hover:text-white transition-colors">
                             <Github size={20} />
                         </a>
-                        <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                            <Twitter size={20} />
+                        <a href="https://www.instagram.com/ll_badal_singh_ll/" className="text-gray-400 hover:text-white transition-colors">
+                            <Instagram size={20} />
                         </a>
-                        <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                        <a href="https://www.linkedin.com/in/badal-singh-454b18255/" className="text-gray-400 hover:text-white transition-colors">
                             <Linkedin size={20} />
                         </a>
                     </div>
