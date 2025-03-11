@@ -3,7 +3,17 @@ import { TextGenerateEffect } from "../ui/text-generate-effect";
 import { TypewriterEffect } from "../ui/typewriter-effect";
 import { Spotlight } from "../ui/spotlight";
 import { ExternalLink, Mail, ArrowDown } from "lucide-react";
-import { typewriterWords } from "../../lib/data";
+
+interface TypewriterWord {
+    text: string;
+    className: string;
+}
+const typewriterWords: TypewriterWord[] = [
+    { text: "Build.", className: "text-blue-500" },
+    { text: "Design.", className: "text-purple-500" },
+    { text: "Develop.", className: "text-green-500" },
+    { text: "Deploy.", className: "text-yellow-500" }
+];
 
 const HeroSection = () => {
   return (
